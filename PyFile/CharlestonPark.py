@@ -1384,9 +1384,13 @@ def delete_patient():
             display_in_table(combination)
 
 def patientNameSearch():
-    gotten = text_PatientName_Search.get('1.0', tk.END).rstrip()
+    PatientName_Search_gotten = text_PatientName_Search.get('1.0', tk.END).rstrip()
     
-    cur.execute('SELECT * FROM BloodSamples WHERE PatientName = ?', (gotten,))
+    sqlstr = '''SELECT * FROM Samples 
+    JOIN Patients ON Samples.patient_id = Patients.id_in_patients 
+    WHERE Patients.PatientName_in_patients = ? 
+    '''
+    cur.execute(sqlstr, (PatientName_Search_gotten,))
     items = cur.fetchall()
     
     clear()
