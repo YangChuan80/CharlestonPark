@@ -1396,6 +1396,45 @@ def patientNameSearch():
     clear()
     display_in_table(items)    
 
+def about():
+    about_root=tk.Tk()
+    
+    w = 367 # width for the Tk root
+    h = 230 # height for the Tk root
+
+    # get screen width and height
+    ws = about_root.winfo_screenwidth() # width of the screen
+    hs = about_root.winfo_screenheight() # height of the screen
+
+    # calculate x and y coordinates for the Tk root window
+    x = (ws/2) - (w/2)
+    y = (hs/2) - (h/2)
+
+    # set the dimensions of the screen 
+    # and where it is placed
+    about_root.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    about_root.title('About Charleston Park')  
+    
+    # Controls
+    
+    label_author=tk.Label(about_root,text='Charleston Park Version 1.0', font=('tahoma', 9))
+    label_author.place(x=90,y=30)
+
+    label_author=tk.Label(about_root,text='Copyright (C) 2017', font=('tahoma', 9))
+    label_author.place(x=125,y=60)
+    
+    label_author=tk.Label(about_root,text='Author: Chuan Yang', font=('tahoma', 9))
+    label_author.place(x=125,y=90)
+    
+    label_author=tk.Label(about_root,text='Shengjing Hospital of China Medical University', font=('tahoma', 9))
+    label_author.place(x=50,y=120)
+   
+
+    button_refresh=ttk.Button(about_root, width=15, text='OK', command=about_root.destroy)
+    button_refresh.place(x=135, y=170)
+
+    about_root.mainloop()
+
 ## Main Flow
 
 root = tk.Tk()
@@ -1594,10 +1633,10 @@ label_Comments.place(x=340,y=y_origin+i*gain-25)
 
 # /////Buttons//////////////////////
 button_browse=ttk.Button(root, text='Samples...', width=15, command=samples)
-button_browse.place(x=1210, y=500)
+button_browse.place(x=1110, y=500)
 
 button_browse=ttk.Button(root, text='Patients...', width=15, command=patients)
-button_browse.place(x=1345, y=500)
+button_browse.place(x=1240, y=500)
 
 button_browse=ttk.Button(root, text='Browse', width=15, command=browse)
 button_browse.place(x=1480, y=500)
@@ -1605,9 +1644,10 @@ button_browse.place(x=1480, y=500)
 # ////////////// Record Num/////////////////
 
 text_num = tk.Text(root, width=8, height=1, font=('tahoma', 8), wrap='none')
-text_num.place(x=1050, y=500)
+text_num.place(x=1400, y=500)
 
 # ////////////// Function Button //////////
+# Sample Information Update & Delete
 
 button_update_sample = ttk.Button(root, text='Update', width=15, command=update_samples)
 button_update_sample.place(x=1345, y=580)
@@ -1615,11 +1655,18 @@ button_update_sample.place(x=1345, y=580)
 button_delete_sample = ttk.Button(root, text='Delete', width=15, command=delete_sample)
 button_delete_sample.place(x=1480, y=580)
 
+# Patient Information Update & Delete
+
 button_update_patient = ttk.Button(root, text='Update', width=15, command=update_patients)
-button_update_patient.place(x=1230, y=825)
+button_update_patient.place(x=1345, y=730)
 
 button_delete_patient = ttk.Button(root, text='Delete', width=15, command=delete_patient)
-button_delete_patient.place(x=1355, y=825)
+button_delete_patient.place(x=1480, y=730)
+
+# About...
+
+button_about = ttk.Button(root, text='About...', width=15, command=about)
+button_about.place(x=1345, y=825)
 
 button_exit = ttk.Button(root, text='Exit', width=15, command=root.destroy)
 button_exit.place(x=1480, y=825)
@@ -1628,17 +1675,17 @@ button_new_sample = ttk.Button(root, text='New Sample...', width=20, command=new
 button_new_sample.place(x=30, y=500)
 
 button_new_patient = ttk.Button(root, text='New Patient...', width=20, command=new_patient)
-button_new_patient.place(x=200, y=500)
+button_new_patient.place(x=190, y=500)
 
 # ///// Search Edit Box//////////
 
 text_PatientName_Search = tk.Text(root, width=20, height=1, font=('tahoma', 9), wrap='none')
-text_PatientName_Search.place(x=440, y=510)
+text_PatientName_Search.place(x=370, y=510)
 label_PatientName_Search = tk.Label(root, text='Patient\'s Name:', font=('tahoma', 8))
-label_PatientName_Search.place(x=440,y=485)
+label_PatientName_Search.place(x=370,y=485)
 
 button_PatientName_Search=ttk.Button(root, text='Search', width=15, command=patientNameSearch)
-button_PatientName_Search.place(x=620, y=500)
+button_PatientName_Search.place(x=550, y=500)
 
 root.mainloop()
 
