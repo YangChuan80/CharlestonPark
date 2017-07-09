@@ -112,14 +112,19 @@ def display_in_text(item):
     text_RackNumber.delete('1.0', tk.END)
     text_RackNumber.insert('1.0', item['RackNumber'])  
     
-    text_SampleType.delete('1.0', tk.END)
-    text_SampleType.insert('1.0', item['SampleType'])
+    #text_SampleType.delete('1.0', tk.END)
+    #text_SampleType.insert('1.0', item['SampleType'])
+    
+    combo_SampleType.set(item['SampleType'])
     
     text_SampleID.delete('1.0', tk.END)
     text_SampleID.insert('1.0', item['SampleID'])
     
-    text_SampleStatus.delete('1.0', tk.END)
-    text_SampleStatus.insert('1.0', item['SampleStatus'])
+    #text_SampleStatus.delete('1.0', tk.END)
+    #text_SampleStatus.insert('1.0', item['SampleStatus'])
+    
+    combo_SampleStatus.set(item['SampleStatus'])
+    
     
     text_PatientName_in_samples.delete('1.0', tk.END)
     text_PatientName_in_samples.insert('1.0', item['PatientName_in_samples'])
@@ -144,8 +149,10 @@ def display_in_text(item):
     text_BirthDate.delete('1.0', tk.END)
     text_BirthDate.insert('1.0', item['BirthDate'])  
     
-    text_Gender.delete('1.0', tk.END)
-    text_Gender.insert('1.0', item['Gender'])   
+    #text_Gender.delete('1.0', tk.END)
+    #text_Gender.insert('1.0', item['Gender'])   
+    
+    combo_Gender.set(item['Gender'])
     
     text_PatientName_CN.delete('1.0', tk.END)
     text_PatientName_CN.insert('1.0', item['PatientName_CN'])
@@ -232,14 +239,12 @@ def samples():
         text_RackNumber.delete('1.0', tk.END)
         text_RackNumber.insert('1.0', item['RackNumber'])  
 
-        text_SampleType.delete('1.0', tk.END)
-        text_SampleType.insert('1.0', item['SampleType'])
+        combo_SampleType.set(item['SampleType'])
 
         text_SampleID.delete('1.0', tk.END)
         text_SampleID.insert('1.0', item['SampleID'])
 
-        text_SampleStatus.delete('1.0', tk.END)
-        text_SampleStatus.insert('1.0', item['SampleStatus'])
+        combo_SampleStatus.set(item['SampleStatus'])
 
         text_PatientName_in_samples.delete('1.0', tk.END)
         text_PatientName_in_samples.insert('1.0', item['PatientName_in_samples'])
@@ -252,8 +257,8 @@ def samples():
             text_id_in_samples_gotten = text_id_in_samples.get('1.0', tk.END).rstrip()        
             RackNumber_gotten = text_RackNumber.get('1.0', tk.END).rstrip()
             SampleID_gotten = text_SampleID.get('1.0', tk.END).rstrip()
-            SampleType_gotten = text_SampleType.get('1.0', tk.END).rstrip()
-            SampleStatus_gotten = text_SampleStatus.get('1.0', tk.END).rstrip()
+            SampleType_gotten = combo_SampleType.get().rstrip()
+            SampleStatus_gotten = combo_SampleStatus.get().rstrip()
             PatientName_in_samples_gotten = text_PatientName_in_samples.get('1.0', tk.END).rstrip()
             Samples_patient_id_gotten = text_Samples_patient_id.get('1.0', tk.END).rstrip()       
 
@@ -428,15 +433,19 @@ def samples():
     label_SampleID = tk.Label(root_samples, text='Sample ID:', font=('tahoma', 8))
     label_SampleID.place(x=240,y=y_origin+i*gain-25)
 
-    text_SampleType = tk.Text(root_samples, width=20, height=1, font=('tahoma', 8), wrap='none')
-    text_SampleType.place(x=440, y=y_origin+i*gain)
+    combo_SampleType = ttk.Combobox(root_samples, width=20, height=1, font=('tahoma', 8))
+    combo_SampleType.place(x=440, y=y_origin+i*gain)
     label_SampleType = tk.Label(root_samples, text='Sample Type:', font=('tahoma', 8))
     label_SampleType.place(x=440,y=y_origin+i*gain-25)
+    combo_SampleType['values'] = ('WholeBlood', 'BloodCells', 'Serum')
+    combo_SampleType['state'] = 'readonly'
 
-    text_SampleStatus = tk.Text(root_samples, width=20, height=1, font=('tahoma', 8), wrap='none')
-    text_SampleStatus.place(x=640, y=y_origin+i*gain)
+    combo_SampleStatus = ttk.Combobox(root_samples, width=20, height=1, font=('tahoma', 8))
+    combo_SampleStatus.place(x=640, y=y_origin+i*gain)
     label_SampleStatus = tk.Label(root_samples, text='Sample Status:', font=('tahoma', 8))
     label_SampleStatus.place(x=640,y=y_origin+i*gain-25)
+    combo_SampleStatus['values'] = ('-80Frozen', '-20Frozen', '4Refrigeration', 'RoomTemperature')
+    combo_SampleStatus['state'] = 'readonly'
     
     i = 1
 
@@ -501,7 +510,11 @@ def patients():
         
     def display_in_table(combination):
         for row in combination:
-            table.insert("", "end", "", values=row)     
+            table.insert("", "end", "", values=row)
+        
+        num = str(len(combination))
+        text_num.delete('1.0', tk.END)
+        text_num.insert('1.0', num)
         
     def display_in_text(item): 
         text_id_in_patients.delete('1.0', tk.END)
@@ -519,8 +532,7 @@ def patients():
         text_BirthDate.delete('1.0', tk.END)
         text_BirthDate.insert('1.0', item['BirthDate'])  
 
-        text_Gender.delete('1.0', tk.END)
-        text_Gender.insert('1.0', item['Gender'])   
+        combo_Gender.set(item['Gender'])   
 
         text_PatientName_CN.delete('1.0', tk.END)
         text_PatientName_CN.insert('1.0', item['PatientName_CN'])
@@ -560,7 +572,7 @@ def patients():
                 id_in_patients_gotten = text_id_in_patients.get('1.0', tk.END).rstrip()
                 PatientName_in_patients_gotten = text_PatientName_in_patients.get('1.0', tk.END).rstrip()
                 PatientName_CN_gotten = text_PatientName_CN.get('1.0', tk.END).rstrip()                
-                Gender_gotten = text_Gender.get('1.0', tk.END).rstrip()
+                Gender_gotten = combo_Gender.get().rstrip()
 
                 ProbandName_gotten = text_ProbandName.get('1.0', tk.END).rstrip()
                 proband_id =  text_proband_id.get('1.0', tk.END).rstrip()
@@ -680,13 +692,54 @@ def patients():
                 
                 # Display the table        
                 display_in_table(combination)
+                
+    def patientNameSearch():
+        InPatientID_Search_gotten = text_InPatientID_search.get('1.0', tk.END).rstrip()
+    
+        sqlstr = '''SELECT * FROM Patients WHERE InPatientID = ? 
+        '''
+        cur.execute(sqlstr, (InPatientID_Search_gotten,))
+        items = cur.fetchall()
+
+        for i in table.get_children():
+            table.delete(i)
+        
+        display_in_table(items)    
+
+    def inPatientIDSearch():
+        PatientName_Search_gotten = text_PatientName_search.get('1.0', tk.END).rstrip()
+    
+        sqlstr = '''SELECT * FROM Patients WHERE PatientName_in_patients = ? 
+        '''
+        cur.execute(sqlstr, (PatientName_Search_gotten,))
+        items = cur.fetchall()
+
+        for i in table.get_children():
+            table.delete(i)
+            
+        display_in_table(items)
+        
+    def browse():
+        # Refresh the whole database
+        refreshDB()
+
+        # Refresh variable combination
+
+        sqlstr = 'SELECT * FROM Patients ORDER BY id_in_patients'
+        spreadsheet = cur.execute(sqlstr)
+        combination = []        
+        for row in spreadsheet:
+            combination.append(row)
+
+        # Display the table
+        display_in_table(combination)
 
     # //////////////////////////////////////////////////////
     # /////// Main Flow ////////////////////////////
 
     root_patients = tk.Tk()    
     
-    w = 1200 # width for the Tk root
+    w = 1500 # width for the Tk root
     h = 840 # height for the Tk root
 
     # get screen width and height
@@ -713,7 +766,7 @@ def patients():
 '''
 
     i = 1
-    header_width = [-30, -50, -20, 30, -30,
+    header_width = [-50, -50, -20, 30, -30,
                     50, 70, 80, 50, 40,
                     90, 90, 90, 90, 90, 60, 50]
 
@@ -746,7 +799,7 @@ def patients():
     
      # ///////////// Raised Label Block ////////////////////////////////////////////////
 
-    label_Patients=tk.Label(root_patients,width=165, height=26 , relief='raised', borderwidth=1)
+    label_Patients=tk.Label(root_patients,width=140, height=25 , relief='raised', borderwidth=1)
     label_Patients.place(x=10,y=y_origin+i*gain-40)
     
     # ///////////// Routine Edits////////////////      
@@ -766,12 +819,17 @@ def patients():
     label_PatientName_in_patients = tk.Label(root_patients, text='Patient\' Name:', font=('tahoma', 8))
     label_PatientName_in_patients.place(x=240,y=y_origin+i*gain-25)
     
+    text_num = tk.Text(root_patients, width=8, height=1, font=('tahoma', 8), wrap='none')
+    text_num.place(x=1120, y=y_origin+i*gain)
+    
     i = 1
 
-    text_Gender = tk.Text(root_patients, width=20, height=1, font=('tahoma', 8), wrap='none')
-    text_Gender.place(x=40, y=y_origin+i*gain)
+    combo_Gender = ttk.Combobox(root_patients, width=20, height=1, font=('tahoma', 8))
+    combo_Gender.place(x=40, y=y_origin+i*gain)
     label_Gender = tk.Label(root_patients, text='Gender:', font=('tahoma', 8))
     label_Gender.place(x=40,y=y_origin+i*gain-25)
+    combo_Gender['values'] = ('Male', 'Female', 'Other')
+    combo_Gender['state'] = 'readonly'
 
     text_ProbandName = tk.Text(root_patients, width=20, height=1, font=('tahoma', 8), wrap='none')
     text_ProbandName.place(x=240, y=y_origin+i*gain)
@@ -799,7 +857,6 @@ def patients():
     text_CitizenID.place(x=240, y=y_origin+i*gain)
     label_CitizenID = tk.Label(root_patients, text='Citizen ID:', font=('tahoma', 8))
     label_CitizenID.place(x=240,y=y_origin+i*gain-25)
-
 
     text_BirthDate = tk.Text(root_patients, width=20, height=1, font=('tahoma', 8), wrap='none')
     text_BirthDate.place(x=440, y=y_origin+i*gain)
@@ -858,7 +915,34 @@ def patients():
     button_delete_sample.place(x=800, y=670)
     
     button_exit = ttk.Button(root_patients, text='Exit', width=15, command=root_patients.destroy)
-    button_exit.place(x=800, y=790)
+    button_exit.place(x=1240, y=790)
+    
+    # //////// Search Area ////////////
+    
+    i = 0
+    
+    button_browse = ttk.Button(root_patients, text='Browse', width=15, command=browse)
+    button_browse.place(x=1240, y=y_origin+i*gain-5)
+    
+    i = 2
+    
+    text_InPatientID_search = tk.Text(root_patients, width=25, height=1, font=('tahoma', 8), wrap='none')
+    text_InPatientID_search.place(x=1050, y=y_origin+i*gain)
+    label_InPatientID_search = tk.Label(root_patients, text='Paitnet ID:', font=('tahoma', 8))
+    label_InPatientID_search.place(x=1050,y=y_origin+i*gain-25)
+    
+    button_InPatientID_search = ttk.Button(root_patients, text='Search', width=15, command=patientNameSearch)
+    button_InPatientID_search.place(x=1240, y=y_origin+i*gain-5)
+    
+    i = 3
+    
+    text_PatientName_search = tk.Text(root_patients, width=25, height=1, font=('tahoma', 8), wrap='none')
+    text_PatientName_search.place(x=1050, y=y_origin+i*gain)
+    label_PatientName_search = tk.Label(root_patients, text='Paitnet Name:', font=('tahoma', 8))
+    label_PatientName_search.place(x=1050,y=y_origin+i*gain-25)
+    
+    button_PatientName_search = ttk.Button(root_patients, text='Search', width=15, command=inPatientIDSearch)
+    button_PatientName_search.place(x=1240, y=y_origin+i*gain-5)
     
     # ///// Browse Automatically /////////////////////
     
@@ -871,8 +955,10 @@ def update_samples():
         text_id_in_samples_gotten = text_id_in_samples.get('1.0', tk.END).rstrip()        
         RackNumber_gotten = text_RackNumber.get('1.0', tk.END).rstrip()
         SampleID_gotten = text_SampleID.get('1.0', tk.END).rstrip()
-        SampleType_gotten = text_SampleType.get('1.0', tk.END).rstrip()
-        SampleStatus_gotten = text_SampleStatus.get('1.0', tk.END).rstrip()
+        #SampleType_gotten = text_SampleType.get('1.0', tk.END).rstrip()
+        SampleType_gotten = combo_SampleType.get().rstrip()
+        #SampleStatus_gotten = text_SampleStatus.get('1.0', tk.END).rstrip()
+        SampleStatus_gotten = combo_SampleStatus.get().rstrip()
         PatientName_in_samples_gotten = text_PatientName_in_samples.get('1.0', tk.END).rstrip()
         Samples_patient_id_gotten = text_Samples_patient_id.get('1.0', tk.END).rstrip()       
         
@@ -919,7 +1005,8 @@ def update_patients():
         id_in_patients_gotten = text_id_in_patients.get('1.0', tk.END).rstrip()
         PatientName_in_patients_gotten = text_PatientName_in_patients.get('1.0', tk.END).rstrip()
         PatientName_CN_gotten = text_PatientName_CN.get('1.0', tk.END).rstrip()                
-        Gender_gotten = text_Gender.get('1.0', tk.END).rstrip()
+        #Gender_gotten = text_Gender.get('1.0', tk.END).rstrip()
+        Gender_gotten = combo_Gender.get().rstrip()
         
         ProbandName_gotten = text_ProbandName.get('1.0', tk.END).rstrip()
         proband_id =  text_proband_id.get('1.0', tk.END).rstrip()
@@ -1019,8 +1106,8 @@ def new_sample():
         try:
             RackNumber_gotten = text_RackNumber.get('1.0', tk.END).rstrip()
             SampleID_gotten = text_SampleID.get('1.0', tk.END).rstrip()
-            SampleType_gotten = text_SampleType.get('1.0', tk.END).rstrip()
-            SampleStatus_gotten = text_SampleStatus.get('1.0', tk.END).rstrip()
+            SampleType_gotten = combo_SampleType.get().rstrip()
+            SampleStatus_gotten = combo_SampleStatus.get().rstrip()
             PatientName_in_samples_gotten = text_PatientName_in_samples.get('1.0', tk.END).rstrip()
             Samples_patient_id_gotten = text_Samples_patient_id.get('1.0', tk.END).rstrip()       
 
@@ -1086,6 +1173,7 @@ def new_sample():
     text_SampleID.delete('1.0', tk.END)
     text_SampleID.insert('1.0', id)  
 
+    '''
     text_SampleType = tk.Text(root_new_sample, width=20, height=1, font=('tahoma', 8), wrap='none')
     text_SampleType.place(x=440, y=y_origin+i*gain)
     label_SampleType = tk.Label(root_new_sample, text='Sample Type:', font=('tahoma', 8))
@@ -1095,6 +1183,24 @@ def new_sample():
     text_SampleStatus.place(x=640, y=y_origin+i*gain)
     label_SampleStatus = tk.Label(root_new_sample, text='Sample Status:', font=('tahoma', 8))
     label_SampleStatus.place(x=640,y=y_origin+i*gain-25)
+    '''
+    
+    # Combobox control
+    combo_SampleType = ttk.Combobox(root_new_sample, width=20, height=1, font=('tahoma', 8))
+    combo_SampleType.place(x=440, y=y_origin+i*gain)
+    label_SampleType = tk.Label(root_new_sample, text='Sample Type:', font=('tahoma', 8))
+    label_SampleType.place(x=440,y=y_origin+i*gain-25)
+    combo_SampleType['values'] = ('WholeBlood', 'BloodCells', 'Serum')
+    combo_SampleType['state'] = 'readonly'
+    combo_SampleType.current(0)
+    
+    combo_SampleStatus = ttk.Combobox(root_new_sample, width=20, height=1, font=('tahoma', 8))
+    combo_SampleStatus.place(x=640, y=y_origin+i*gain)
+    label_SampleStatus = tk.Label(root_new_sample, text='Sample Status:', font=('tahoma', 8))
+    label_SampleStatus.place(x=640,y=y_origin+i*gain-25)
+    combo_SampleStatus['values'] = ('-80Frozen', '-20Frozen', '4Refrigeration', 'RoomTemperature')
+    combo_SampleStatus['state'] = 'readonly'
+    combo_SampleStatus.current(0)
     
     i = 1
 
@@ -1151,10 +1257,10 @@ def new_patient():
             id += t
     
     def create():
-        #try:            
+        try:            
             PatientName_in_patients_gotten = text_PatientName_in_patients.get('1.0', tk.END).rstrip()
             PatientName_CN_gotten = text_PatientName_CN.get('1.0', tk.END).rstrip()                
-            Gender_gotten = text_Gender.get('1.0', tk.END).rstrip()
+            Gender_gotten = combo_Gender.get().rstrip()
 
             ProbandName_gotten = text_ProbandName.get('1.0', tk.END).rstrip()
             proband_id =  text_proband_id.get('1.0', tk.END).rstrip()
@@ -1220,8 +1326,8 @@ def new_patient():
             display_in_table(combination)
             root_new_patient.destroy()
                 
-        #except:
-            #pass
+        except:
+            pass
 
     # ///////// Main Stream ////////////////////////
     
@@ -1248,10 +1354,12 @@ def new_patient():
     
     i = 1
 
-    text_Gender = tk.Text(root_new_patient, width=20, height=1, font=('tahoma', 8), wrap='none')
-    text_Gender.place(x=40, y=y_origin+i*gain)
+    combo_Gender = ttk.Combobox(root_new_patient, width=20, height=1, font=('tahoma', 8))
+    combo_Gender.place(x=40, y=y_origin+i*gain)
     label_Gender = tk.Label(root_new_patient, text='Gender:', font=('tahoma', 8))
     label_Gender.place(x=40,y=y_origin+i*gain-25)
+    combo_Gender['values'] = ('Male', 'Female', 'Other')
+    combo_Gender['state'] = 'readonly'
 
     text_ProbandName = tk.Text(root_new_patient, width=20, height=1, font=('tahoma', 8), wrap='none')
     text_ProbandName.place(x=240, y=y_origin+i*gain)
@@ -1435,6 +1543,9 @@ def about():
 
     about_root.mainloop()
 
+def testCombo():
+    print(combo_SampleType.get())
+
 ## Main Flow
 
 root = tk.Tk()
@@ -1516,15 +1627,20 @@ text_SampleID.place(x=240, y=y_origin+i*gain)
 label_SampleID = tk.Label(root, text='Sample ID:', font=('tahoma', 8))
 label_SampleID.place(x=240,y=y_origin+i*gain-25)
 
-text_SampleType = tk.Text(root, width=20, height=1, font=('tahoma', 8), wrap='none')
-text_SampleType.place(x=440, y=y_origin+i*gain)
+# Combobox control
+combo_SampleType = ttk.Combobox(root, width=20, height=1, font=('tahoma', 8))
+combo_SampleType.place(x=440, y=y_origin+i*gain)
 label_SampleType = tk.Label(root, text='Sample Type:', font=('tahoma', 8))
 label_SampleType.place(x=440,y=y_origin+i*gain-25)
+combo_SampleType['values'] = ('WholeBlood', 'BloodCells', 'Serum')
+combo_SampleType['state'] = 'readonly'
 
-text_SampleStatus = tk.Text(root, width=20, height=1, font=('tahoma', 8), wrap='none')
-text_SampleStatus.place(x=640, y=y_origin+i*gain)
+combo_SampleStatus = ttk.Combobox(root, width=20, height=1, font=('tahoma', 8))
+combo_SampleStatus.place(x=640, y=y_origin+i*gain)
 label_SampleStatus = tk.Label(root, text='Sample Status:', font=('tahoma', 8))
 label_SampleStatus.place(x=640,y=y_origin+i*gain-25)
+combo_SampleStatus['values'] = ('-80Frozen', '-20Frozen', '4Refrigeration', 'RoomTemperature')
+combo_SampleStatus['state'] = 'readonly'
 
 text_PatientName_in_samples = tk.Text(root, width=20, height=1, font=('tahoma', 8), wrap='none')
 text_PatientName_in_samples.place(x=840, y=y_origin+i*gain)
@@ -1555,10 +1671,12 @@ text_PatientName_in_patients.place(x=240, y=y_origin+i*gain)
 label_PatientName_in_patients = tk.Label(root, text='Patient\' Name:', font=('tahoma', 8))
 label_PatientName_in_patients.place(x=240,y=y_origin+i*gain-25)
 
-text_Gender = tk.Text(root, width=20, height=1, font=('tahoma', 8), wrap='none')
-text_Gender.place(x=440, y=y_origin+i*gain)
+combo_Gender = ttk.Combobox(root, width=20, height=1, font=('tahoma', 8))
+combo_Gender.place(x=440, y=y_origin+i*gain)
 label_Gender = tk.Label(root, text='Gender:', font=('tahoma', 8))
 label_Gender.place(x=440,y=y_origin+i*gain-25)
+combo_Gender['values'] = ('Male', 'Female', 'Other')
+combo_Gender['state'] = 'readonly'
 
 text_ProbandName = tk.Text(root, width=20, height=1, font=('tahoma', 8), wrap='none')
 text_ProbandName.place(x=640, y=y_origin+i*gain)
@@ -1668,14 +1786,22 @@ button_delete_patient.place(x=1480, y=730)
 button_about = ttk.Button(root, text='About...', width=15, command=about)
 button_about.place(x=1345, y=825)
 
+# Exit
+
 button_exit = ttk.Button(root, text='Exit', width=15, command=root.destroy)
 button_exit.place(x=1480, y=825)
+
+# New
 
 button_new_sample = ttk.Button(root, text='New Sample...', width=20, command=new_sample)
 button_new_sample.place(x=30, y=500)
 
 button_new_patient = ttk.Button(root, text='New Patient...', width=20, command=new_patient)
 button_new_patient.place(x=190, y=500)
+
+# Test Combo
+#button_testCombo = ttk.Button(root, text='New Patient...', width=20, command=testCombo)
+#button_testCombo.place(x=290, y=500)
 
 # ///// Search Edit Box//////////
 
