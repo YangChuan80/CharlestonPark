@@ -349,13 +349,55 @@ def samples():
                     
                 # Display the table        
                 display_in_table(combination)
+                
+    def sampleIDSearch():
+        PatientName_Search_gotten = text_SampleID_search.get('1.0', tk.END).rstrip()
+    
+        sqlstr = '''SELECT * FROM Samples WHERE SampleID = ?  
+        '''
+        cur.execute(sqlstr, (PatientName_Search_gotten,))
+        items = cur.fetchall()
+
+        for i in table.get_children():
+            table.delete(i)
+            
+        display_in_table(items)
+                
+    def patientNameSearch():
+        PatientName_Search_gotten = text_PatientName_search.get('1.0', tk.END).rstrip()
+    
+        sqlstr = '''SELECT * FROM Samples WHERE PatientName_in_samples = ? 
+        '''
+        cur.execute(sqlstr, (PatientName_Search_gotten,))
+        items = cur.fetchall()
+
+        for i in table.get_children():
+            table.delete(i)
+        
+        display_in_table(items) 
+        
+        
+    def browse():
+        # Refresh the whole database
+        refreshDB()
+
+        # Refresh variable combination
+
+        sqlstr = 'SELECT * FROM Samples ORDER BY id_in_samples'
+        spreadsheet = cur.execute(sqlstr)
+        combination = []        
+        for row in spreadsheet:
+            combination.append(row)
+
+        # Display the table
+        display_in_table(combination)
 
     
     # /////// Main Flow ////////////////////////////
 
     root_samples = tk.Tk()    
     
-    w = 1200 # width for the Tk root
+    w = 1400 # width for the Tk root
     h = 730 # height for the Tk root
 
     # get screen width and height
@@ -413,7 +455,7 @@ def samples():
     
     # ///////////// Raised Label Block ////////////////////////////////////////////////
 
-    label_Patients=tk.Label(root_samples,width=165, height=9 , relief='raised', borderwidth=1)
+    label_Patients=tk.Label(root_samples,width=140, height=9 , relief='raised', borderwidth=1)
     label_Patients.place(x=10,y=y_origin+i*gain-40)
     
     # ///////////// Routine Edits////////////////
@@ -459,6 +501,33 @@ def samples():
     label_patient_id = tk.Label(root_samples, text='Patient ID:', font=('tahoma', 8))
     label_patient_id.place(x=240,y=y_origin+i*gain-25)  
     
+    # //////// Search Area ////////////
+    
+    i = -0.7
+    
+    button_browse = ttk.Button(root_samples, text='Browse', width=15, command=browse)
+    button_browse.place(x=1240, y=y_origin+i*gain-5)
+    
+    i = 0.3
+    
+    text_SampleID_search = tk.Text(root_samples, width=25, height=1, font=('tahoma', 8), wrap='none')
+    text_SampleID_search.place(x=1050, y=y_origin+i*gain)
+    label_SampleID_search = tk.Label(root_samples, text='Sample ID:', font=('tahoma', 8))
+    label_SampleID_search.place(x=1050,y=y_origin+i*gain-25)
+    
+    button_InPatientID_search = ttk.Button(root_samples, text='Search', width=15, command=sampleIDSearch)
+    button_InPatientID_search.place(x=1240, y=y_origin+i*gain-5)
+    
+    i = 1.3
+    
+    text_PatientName_search = tk.Text(root_samples, width=25, height=1, font=('tahoma', 8), wrap='none')
+    text_PatientName_search.place(x=1050, y=y_origin+i*gain)
+    label_PatientName_search = tk.Label(root_samples, text='Paitnet Name:', font=('tahoma', 8))
+    label_PatientName_search.place(x=1050,y=y_origin+i*gain-25)
+    
+    button_PatientName_search = ttk.Button(root_samples, text='Search', width=15, command=patientNameSearch)
+    button_PatientName_search.place(x=1240, y=y_origin+i*gain-5)   
+    
     # ////// Buttons //////////////////////////
     
     button_update_sample = ttk.Button(root_samples, text='Update', width=15, command=update_samples)
@@ -468,7 +537,7 @@ def samples():
     button_delete_sample.place(x=800, y=590)
     
     button_exit = ttk.Button(root_samples, text='Exit', width=15, command=root_samples.destroy)
-    button_exit.place(x=800, y=670)
+    button_exit.place(x=1240, y=670)
     
     # ///// Browse Automatically /////////////////////
     
@@ -694,11 +763,11 @@ def patients():
                 display_in_table(combination)
                 
     def patientNameSearch():
-        InPatientID_Search_gotten = text_InPatientID_search.get('1.0', tk.END).rstrip()
+        PatientName_Search_gotten = text_PatientName_search.get('1.0', tk.END).rstrip()
     
-        sqlstr = '''SELECT * FROM Patients WHERE InPatientID = ? 
+        sqlstr = '''SELECT * FROM Patients WHERE PatientName_in_patients = ? 
         '''
-        cur.execute(sqlstr, (InPatientID_Search_gotten,))
+        cur.execute(sqlstr, (PatientName_Search_gotten,))
         items = cur.fetchall()
 
         for i in table.get_children():
@@ -707,11 +776,11 @@ def patients():
         display_in_table(items)    
 
     def inPatientIDSearch():
-        PatientName_Search_gotten = text_PatientName_search.get('1.0', tk.END).rstrip()
+        InPatientID_Search_gotten = text_InPatientID_search.get('1.0', tk.END).rstrip()        
     
-        sqlstr = '''SELECT * FROM Patients WHERE PatientName_in_patients = ? 
+        sqlstr = '''SELECT * FROM Patients WHERE InPatientID = ?  
         '''
-        cur.execute(sqlstr, (PatientName_Search_gotten,))
+        cur.execute(sqlstr, (InPatientID_Search_gotten,))
         items = cur.fetchall()
 
         for i in table.get_children():
@@ -931,7 +1000,7 @@ def patients():
     label_InPatientID_search = tk.Label(root_patients, text='Paitnet ID:', font=('tahoma', 8))
     label_InPatientID_search.place(x=1050,y=y_origin+i*gain-25)
     
-    button_InPatientID_search = ttk.Button(root_patients, text='Search', width=15, command=patientNameSearch)
+    button_InPatientID_search = ttk.Button(root_patients, text='Search', width=15, command=inPatientIDSearch)
     button_InPatientID_search.place(x=1240, y=y_origin+i*gain-5)
     
     i = 3
@@ -941,7 +1010,7 @@ def patients():
     label_PatientName_search = tk.Label(root_patients, text='Paitnet Name:', font=('tahoma', 8))
     label_PatientName_search.place(x=1050,y=y_origin+i*gain-25)
     
-    button_PatientName_search = ttk.Button(root_patients, text='Search', width=15, command=inPatientIDSearch)
+    button_PatientName_search = ttk.Button(root_patients, text='Search', width=15, command=patientNameSearch)
     button_PatientName_search.place(x=1240, y=y_origin+i*gain-5)
     
     # ///// Browse Automatically /////////////////////
@@ -1543,9 +1612,6 @@ def about():
 
     about_root.mainloop()
 
-def testCombo():
-    print(combo_SampleType.get())
-
 ## Main Flow
 
 root = tk.Tk()
@@ -1798,10 +1864,6 @@ button_new_sample.place(x=30, y=500)
 
 button_new_patient = ttk.Button(root, text='New Patient...', width=20, command=new_patient)
 button_new_patient.place(x=190, y=500)
-
-# Test Combo
-#button_testCombo = ttk.Button(root, text='New Patient...', width=20, command=testCombo)
-#button_testCombo.place(x=290, y=500)
 
 # ///// Search Edit Box//////////
 
