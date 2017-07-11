@@ -1,63 +1,70 @@
-# Bellfort Sequence Parser
-A dialog-based GUI application of gene read-alignment parsing and analysis.
+# Charleston Park
+A dialog-based biobank data/database management tools.
 
-**Chen Lab**
-<br>Human Genome Sequencing Center
-<br>Department of Molecular and Human Genetics
-<br>Baylor College of Medicine
+***Chuan Yang*** (<yangc@sj-hospital.org>)
+
+[![Windows Build status](https://img.shields.io/badge/Windows-passing-brightgreen.svg)](https://github.com/YangChuan80/WillowbendDICOM)
+[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE)
+[![Dowloads](https://img.shields.io/badge/downloads-43M-green.svg)](https://github.com/YangChuan80/WillowbendDICOM/raw/master/Installer/WillowbendDICOM_Installer.exe?raw=true)
+[![Medicine Application](https://img.shields.io/badge/application-medicine-red.svg)](README.md)
+[![Home](https://img.shields.io/badge/GitHub-home-ff69b4.svg)](https://github.com/YangChuan80)
 
 ## Introduction
-**Read Alignment Problem:** 
-The advancement of sequencing technologies has made it feasible for researchers to consider many high-throughput biological applications. A core step of these applications is to align an enormous amount of short DNA sequences to other enormous amounts of reads in FASTQ files. A first generation of hash table-based methods has been developed, including MAQ, which is accurate, feature rich and fast enough to align short reads from a single individual. Python dictionaries are implemented using hash tables. It is an array whose indexes are obtained using a hash function on the keys. The goal of a hash function is to distribute the keys evenly in the array. A good hash function minimizes the number of collisions e.g. different keys having the same hash.  
+**Biobanks** are increasingly playing an important role in biotechnology, pharmaceutical and medical research. The ability to manage an ever-increasing number of biosamples (blood, tissue, DNA etc.) and to comply with the regulatory requirements, such as HTA, GCLP, MHRA, FDA 21  CFR Part 11 and other similar requirements, is a high priority for all organisations working in this area.  
 
-**Bellfort Sequence Parser** is a dialog-based GUI application solving the read alignment problems and corresponding I/O implementations. It has a friendly user-interface to perform FASTQ/sequence file browsing, loading and preprocessing. The algorithm of FASTQ read preprocess uses k-mer index by which the specific gene sequence search can be speedy and easy with a high performance and low system resource consumption. The term k-mer typically refers to all the possible substrings of length k that are contained in a string. In computational genomics, k-mers refer to all the possible subsequences (of length k) from a read obtained through DNA Sequencing. After building a k-mer dictionary (hash table), every key (single gene sequence) of this dictionary can map the specific read(s) immediately when the searching is performed. When the perfect match (exact match) made, app can count the match number for each gene sequence, and list them in the spreadsheet table. Furthermore, this spreadsheet of sequence matching counts can easily be exported to a csv file.
+**Biobank Management Systems** are frequently built from **Laboratory Information Management Systems (LIMS)**, but need to be configured to deliver a solution that meets the specific requirements in a clearly understandable way. Biobanks can handle a wide range of sample types. In addition to the more traditional collections of human tissues biobanks, there are also collections of animal tissues or botanical samples.
+
+**Charleston Park** is a dialog-based application performing the conversion from DICOM format to video format (avi) in order to meet the needs and requirements for universal computer systems (PC, Mac, Linux, etc.). So the ordinary users of such systems can use the converted file to present, communicate and store the universal files. 
+
+Medical imaging related staffs (including Interventional Cardiologists, Physicians of Peripheral Intervention, Neurointerventional Physicians, Medical Imaging Physicians and Radiological Technicians) can use it in medical conferences, educations and remote consultants of clinical medicine, and they will feel free to use universal video formats in the slide presentations in medical courses and case reports. 
+
+Furthermore, besides efficiently converting a file from DICOM to AVI format, Willowbend DICOM can implement **auto grey-scale optimization** and customization for every frame in a DICOM before conversion, and it's able to extract patient's information rapidly from the DICOM files. 
+[![Auto Grey-scale Optimization](agso.png)](README.md)
 
 ## Installation from Binaries
-- Download **[BellfortSequenceParser_Installer.exe](https://github.com/YangChuan80/BellfortSequenceParser/blob/master/BellfortSequenceParser_Installer.exe?raw=true)** file, which is a NSIS installation file only used in Windows platform. 
-- After downloading, you can install it directly. When finished, a folder with the same name have been made. Enter the folder BellfortSequenceParser, run the **BellfortSequenceParser.EXE** to go!
+- Download **[WillowbendDICOM_Installer.exe](https://github.com/YangChuan80/WillowbendDICOM/raw/master/Installer/WillowbendDICOM_Installer.exe?raw=true)** file from **[here](https://github.com/YangChuan80/WillowbendDICOM/raw/master/Installer/WillowbendDICOM_Installer.exe?raw=true)**, which is a NSIS installation file only used in Windows platform. 
+- After downloading, you can install it directly. When finished, a folder with the same name have been made. Enter the folder WillowbendDICOM, run the **WillowbendDICOM.EXE** to go!
+- This option is for ordinary users, who are not required to possess any knowledge of Python programming language or to have Python interpreter configured on their computers.
+- Willowbend DICOM can currently be installed on Windows 7 or later platform only.
 
 ## Installation from Source
-There are several dependencies necessarily preinstalled in your Python interpreter:
+This option is only adopted by Python specialist. There are several dependencies necessarily preinstalled in your Python interpreter:
 
-- **Numpy**
-
+- **SimpleITK**
 ```
- pip install numpy
+ conda install --channel https://conda.anaconda.org/SimpleITK SimpleITK
+ ```
+
+- **Pydicom** 1.0
+ - Download pydicom source from [https://github.com/darcymason/pydicom](https://github.com/darcymason/pydicom)
+
+- **OpenCV**
+ - Download the wheel file from [https://scivision.co/install-opencv-3-0-x-for-python-on-windows/](https://scivision.co/install-opencv-3-0-x-for-python-on-windows/)
+
+After you complete the WillowbendDICOM.py file download, run it:
+```
+python WillowbendDICOM.py
+```
+Python interpreter have to be Python 3.4 or later.
+
+- **Setuptools & Pyinstaler**
+ - If you'd like to use **PyInstaller**, you should downgrade your **setuptools** module to **19.2**.
+
+To perform frozen binary, do this:
+```
+pyinstaller WillowbendDICOM.py -w
 ```
 
-- **Pandas**
-
-```
- pip install pandas
-```
-
-- **Tkinter**
- - Tkinter is a standard library which has been preinstalled in Python 2.7 or higher issues.
-
-After you complete the BellfortSequenceParser.py file download, run it:
-
-```
-python BellfortSequenceParser.py
-```
-
-Python interpreter have to be Python 3.4 or higher.
 ## Instructions
-- Click **Load sgRNA** button to choose the sequence file.  
-- Load half-matched sequence file by pressing **Load Half Matched sgRNA** button. When file successfully loaded, you can continue to count matched sequences from the last stop point you completed. Don't forget load FASTQ file.
-- A record number displayed on the right to show how many sequences are there in your loaded file. You can browse the list of these sequences by clicking **Browse** button, but please be patient to wait for the list loading session which will take up to 30 seconds. Please do not take any other action, which would result in a crash of your operating system.
-- Click **Browse FASTQ...** button to choose the FASTQ file. 
-- Load this chosen file by pressing **Load FASTQ** button. When file successfully loaded, a information dialog will also pop up. 
-- A read number displayed on the bottom to show how many reads this FASTQ file has.
-- Please check the number of reads first. If the memory of your PC is less or equals to 8M AND the number of your current loaded FASTQ file is more than 1,000,000 lines of reads. We highly recommend you divide your FASTQ file by every 500,000 lines of reads by clicking **Divide FASTQ** to prevent overflow of your computer's memory.
-- If you have performed the FASTQ file division, you have to reload your divided FASTQ files again by pressing **Browse FASTQ...** and **Load FASTQ** buttons.
-- Do the preprcessing of FASTQ file and count the matched sequences. It's a two-step action. Preprocess of FASTQ is very important for your read-alignment operation. It will take several minutes to achieve. Please be patient during this period. After preprocess successfully completed, do the counts of all matched sequences with the reads will automatically begins. This course of event will be very fast, and it will cost you less than 1 second! Of course, you can browse your result in the table again. After clicking **Preprocess FASTQ & Count Matched Sequences** button, you can drink a cup of coffee and relex a little bit from your computer work. 
-- A text box assigned with 20 by default is on the right of the **Preprocess FASTQ & Count Matched Sequences** button. It means currently the app build a 20-mer dictionary (k = 20) conforming your sequence lenght. You can also specify the k number instead of 20 to customize your sequence matching. - 
-- Use **Export** to output a csv file of your count results. Your count report is ready! Congratulations!
+- Click **Browse** button to choose the DICOM file. 
+- Load this chosen file. Don't forget to press **Load** button. When file successfully loaded, a information dialog will pop up to notice you. 
+- Click **Convert** button on the right to convert the currently loaded DICOM file to AVI file. During this session, you will be asked to specify the location you're going to output to. Next you are required to select the VIDEO COMPRESSION options, which the **"Full Frames (Uncompressed)"** is recommended. Click **OK**. You'll wait for about a second, and your AVI file is ready! Congratulations!
+- Optionally, you can customize the value of the **Clip Limit** if you're not satisfied with your converted AVI file with the default value of 3.0. The higher value means the more contrast effect in the video file you'll get. 
 
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2016 Chen Lab
+Copyright (c) 2016 Chuan Yang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,4 +82,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE..
+SOFTWARE.
+
+## Contributor List
+- [@wenzhexue](http://github.com/wenzhexue) (**Wenzhe Xue**, Ph.D., Mayo Clinic) 
