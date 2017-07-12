@@ -14,36 +14,22 @@ A dialog-based biobank data/database management tools.
 
 **Biobank Management Systems** are frequently built from **Laboratory Information Management Systems (LIMS)**, but need to be configured to deliver a solution that meets the specific requirements in a clearly understandable way. Biobanks can handle a wide range of sample types. In addition to the more traditional collections of human tissues biobanks, there are also collections of animal tissues or botanical samples.
 
-**Charleston Park** is a dialog-based application performing the conversion from DICOM format to video format (avi) in order to meet the needs and requirements for universal computer systems (PC, Mac, Linux, etc.). So the ordinary users of such systems can use the converted file to present, communicate and store the universal files. 
+**Charleston Park** is a dialog-based application performing the management of data of the patients with cardiovascular disease. The data includes patient basic information, sample information and imaging information of cardiology.
 
-Medical imaging related staffs (including Interventional Cardiologists, Physicians of Peripheral Intervention, Neurointerventional Physicians, Medical Imaging Physicians and Radiological Technicians) can use it in medical conferences, educations and remote consultants of clinical medicine, and they will feel free to use universal video formats in the slide presentations in medical courses and case reports. 
-
-Furthermore, besides efficiently converting a file from DICOM to AVI format, Willowbend DICOM can implement **auto grey-scale optimization** and customization for every frame in a DICOM before conversion, and it's able to extract patient's information rapidly from the DICOM files. 
-[![Auto Grey-scale Optimization](agso.png)](README.md)
+Furthermore, I use relational database to combine all sorts of patient's information together, so that the scability of can be achieved during our clinical practice. 
 
 ## Installation from Binaries
-- Download **[WillowbendDICOM_Installer.exe](https://github.com/YangChuan80/WillowbendDICOM/raw/master/Installer/WillowbendDICOM_Installer.exe?raw=true)** file from **[here](https://github.com/YangChuan80/WillowbendDICOM/raw/master/Installer/WillowbendDICOM_Installer.exe?raw=true)**, which is a NSIS installation file only used in Windows platform. 
-- After downloading, you can install it directly. When finished, a folder with the same name have been made. Enter the folder WillowbendDICOM, run the **WillowbendDICOM.EXE** to go!
+- Download **[CharlestonPark_Installer.exe](https://github.com/YangChuan80/CharlestonPark/blob/master/CharlestonPark_Installer.exe?raw=true)** file from **[here](https://github.com/YangChuan80/CharlestonPark/blob/master/CharlestonPark_Installer.exe?raw=true)**, which is a NSIS installation file only used in Windows platform. 
+- After downloading, you can install it directly. When finished, a folder with the same name have been made. Enter the folder CharlestonPark, run the **CharlestonPark.EXE** to go!
 - This option is for ordinary users, who are not required to possess any knowledge of Python programming language or to have Python interpreter configured on their computers.
-- Willowbend DICOM can currently be installed on Windows 7 or later platform only.
+- CharlestonPark can also be run on Mac OSX and Linux.
 
 ## Installation from Source
-This option is only adopted by Python specialist. There are several dependencies necessarily preinstalled in your Python interpreter:
+This option is only adopted by Python specialist. 
 
-- **SimpleITK**
+After you complete the CharlestonPark.py and database files download, run it:
 ```
- conda install --channel https://conda.anaconda.org/SimpleITK SimpleITK
- ```
-
-- **Pydicom** 1.0
- - Download pydicom source from [https://github.com/darcymason/pydicom](https://github.com/darcymason/pydicom)
-
-- **OpenCV**
- - Download the wheel file from [https://scivision.co/install-opencv-3-0-x-for-python-on-windows/](https://scivision.co/install-opencv-3-0-x-for-python-on-windows/)
-
-After you complete the WillowbendDICOM.py file download, run it:
-```
-python WillowbendDICOM.py
+python CharlestonPark.py
 ```
 Python interpreter have to be Python 3.4 or later.
 
@@ -52,19 +38,21 @@ Python interpreter have to be Python 3.4 or later.
 
 To perform frozen binary, do this:
 ```
-pyinstaller WillowbendDICOM.py -w
+pyinstaller CharlestonPark.py -w
 ```
 
 ## Instructions
-- Click **Browse** button to choose the DICOM file. 
-- Load this chosen file. Don't forget to press **Load** button. When file successfully loaded, a information dialog will pop up to notice you. 
-- Click **Convert** button on the right to convert the currently loaded DICOM file to AVI file. During this session, you will be asked to specify the location you're going to output to. Next you are required to select the VIDEO COMPRESSION options, which the **"Full Frames (Uncompressed)"** is recommended. Click **OK**. You'll wait for about a second, and your AVI file is ready! Congratulations!
-- Optionally, you can customize the value of the **Clip Limit** if you're not satisfied with your converted AVI file with the default value of 3.0. The higher value means the more contrast effect in the video file you'll get. 
+- Click **Browse** button to browse the information of all samples and patients. 
+- When the information lists, you can double click the row, then the detailed information will display in the lower part of the dialog. 
+- If you want change the detailed information, after you edit it, you can click the **Update**. After the dialog pop up, your edited changes will update to the database.
+- You also can create a new record of sample and/or patient by clicking **New Sample...** and/or **New Patient...**.
+- Click **Samples...** or **Patients...** button on the right, you can browse, change and delete the information of sample and patient at one time from the database.
+- Besides, the search services are available in main dialogue and **Samples...**/**Patients...** dialogue. ***Charleston Park*** provide patient name search, in-patient ID search and sample ID search options to let you to query the database. 
 
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2016 Chuan Yang
+Copyright (c) 2017 Chuan Yang
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -83,6 +71,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-## Contributor List
-- [@wenzhexue](http://github.com/wenzhexue) (**Wenzhe Xue**, Ph.D., Mayo Clinic) 
