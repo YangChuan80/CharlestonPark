@@ -16,7 +16,7 @@ A dialog-based biobank data/database management tools.
 
 ***Charleston Park*** is a dialog-based application performing the management of data of the patients with cardiovascular disease. The data includes patient basic information, sample information and imaging information of cardiology.
 
-Furthermore, I use relational database to combine all sorts of patient's information together, so that the scability of can be achieved during our clinical practice. 
+Furthermore, I use relational database to combine all sorts of patient's information together, so that the scability of all kinds of data can be achieved during our clinical practice. 
 
 ## Installation from Binaries
 - Download **[CharlestonPark_Installer.exe](https://github.com/YangChuan80/CharlestonPark/blob/master/CharlestonPark_Installer.exe?raw=true)** file from **[here](https://github.com/YangChuan80/CharlestonPark/blob/master/CharlestonPark_Installer.exe?raw=true)**, which is a NSIS installation file only used in Windows platform. 
