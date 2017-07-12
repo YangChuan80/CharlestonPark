@@ -14,7 +14,7 @@ A dialog-based biobank data/database management tools.
 
 **Biobank Management Systems** are frequently built from **Laboratory Information Management Systems (LIMS)**, but need to be configured to deliver a solution that meets the specific requirements in a clearly understandable way. Biobanks can handle a wide range of sample types. In addition to the more traditional collections of human tissues biobanks, there are also collections of animal tissues or botanical samples.
 
-**Charleston Park** is a dialog-based application performing the management of data of the patients with cardiovascular disease. The data includes patient basic information, sample information and imaging information of cardiology.
+***Charleston Park*** is a dialog-based application performing the management of data of the patients with cardiovascular disease. The data includes patient basic information, sample information and imaging information of cardiology.
 
 Furthermore, I use relational database to combine all sorts of patient's information together, so that the scability of can be achieved during our clinical practice. 
 
