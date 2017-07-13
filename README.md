@@ -18,6 +18,8 @@ A dialog-based biobank data/database management tools.
 
 Furthermore, I use relational database to combine all sorts of patient's information together, so that the scability of all kinds of data can be achieved during our clinical practice. 
 
+[![Auto Grey-scale Optimization](CharlestonPark_Interface.jpg)](README.md)
+
 ## Installation from Binaries
 - Download **[CharlestonPark_Installer.exe](https://github.com/YangChuan80/CharlestonPark/blob/master/CharlestonPark_Installer.exe?raw=true)** file from **[here](https://github.com/YangChuan80/CharlestonPark/blob/master/CharlestonPark_Installer.exe?raw=true)**, which is a NSIS installation file only used in Windows platform. 
 - After downloading, you can install it directly. When finished, a folder with the same name have been made. Enter the folder CharlestonPark, run the **CharlestonPark.EXE** to go!
