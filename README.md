@@ -33,7 +33,7 @@ After you complete the CharlestonPark.py and database files download, run it:
 ```
 python CharlestonPark.py
 ```
-Python interpreter have to be Python 3.4 or later.
+Python interpreter has to be Python 3.4 or later.
 
 - **Setuptools & Pyinstaler**
  - If you'd like to use **PyInstaller**, you should downgrade your **setuptools** module to **19.2**.
